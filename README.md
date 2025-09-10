@@ -1,36 +1,44 @@
-# Lumensia-marketplace
-Lumensia Marketplace  Lumensia Marketplace adalah aplikasi web sederhana berbasis HTML, CSS, dan JavaScript yang dirancang untuk mendukung ekosistem Pi Network. Marketplace ini memungkinkan pengguna untuk melihat, memilih, dan melakukan checkout produk menggunakan Pi sebagai metode pembayaran.
+# 🛍️ Lumensia Marketplace  
 
-✨ Fitur Utama
+**Lumensia Marketplace** adalah aplikasi web sederhana berbasis **HTML, CSS, dan JavaScript** yang dirancang untuk mendukung ekosistem **Pi Network**.  
+Marketplace ini memungkinkan pengguna untuk melihat, memilih, dan melakukan checkout produk menggunakan **Pi** sebagai metode pembayaran.  
 
-Tampilan produk dengan kategori (contoh: kebutuhan pokok).
+---
 
-Harga produk otomatis dikonversi ke 1 Pi sesuai Global Consensus Value (GCV).
+## ✨ Fitur Utama
+- Tampilan produk dengan kategori (contoh: kebutuhan pokok).  
+- Harga produk otomatis dikonversi ke **1 Pi** sesuai **Global Consensus Value (GCV)**.  
+- Keranjang belanja sederhana dengan tombol **"Tambah ke Keranjang"**.  
+- Tombol **Bayar dengan Pi** (placeholder, dapat dikembangkan dengan **Pi SDK**).  
+- Responsive design, dapat dibuka melalui **Pi Browser**.  
 
-Keranjang belanja sederhana dengan tombol "Tambah ke Keranjang".
+---
 
-Tombol Bayar dengan Pi (placeholder, bisa dikembangkan menggunakan Pi SDK).
+## 🚀 Deploy
+Marketplace ini dapat dengan mudah di-deploy menggunakan:  
+- **[Vercel](https://vercel.com)** → URL otomatis setelah push repo.  
+- **[GitHub Pages](https://pages.github.com)** → URL berbasis username GitHub.  
+- Bisa juga menggunakan hosting custom dengan domain `.pi` (jika sudah tersedia di ekosistem Pi Network).  
 
-Responsive design, bisa dibuka melalui Pi Browser.
+---
 
-🚀 Deploy
+## 📌 Roadmap
+- [ ] Integrasi pembayaran menggunakan **Pi SDK**.  
+- [ ] Penambahan kategori produk dan fitur pencarian.  
+- [ ] Desain lebih rapi dengan **CSS Grid/Flexbox**.  
+- [ ] Dukungan transaksi multi-vendor.  
 
-Marketplace ini dapat di-deploy dengan mudah menggunakan:
+---
 
-Vercel
- → URL otomatis.
+## 📷 Preview
+Tampilan saat ini:  
 
-GitHub Pages
- → URL berbasis username GitHub.
+![Preview Lumensia Marketplace](./images/preview.png)  
 
-Bisa juga menggunakan hosting custom dengan domain .pi (saat tersedia di ekosistem Pi).
+---
 
-📌 Roadmap
+## 📖 Lisensi
+Proyek ini bersifat **open-source** dengan lisensi [MIT](LICENSE).  
+Silakan gunakan, modifikasi, dan kontribusi untuk mengembangkan ekosistem Pi Network lebih luas.  
 
- Integrasi pembayaran menggunakan Pi SDK.
-
- Penambahan kategori produk dan fitur pencarian.
-
- Desain lebih rapi dengan CSS Grid/Flexbox.
-
- Dukungan transaksi multi-vendor.
+---

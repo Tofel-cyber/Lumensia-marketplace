@@ -1,71 +1,168 @@
-.detail {
+/* ===============================
+   RESET & GLOBAL
+=============================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f5f6f8;
+  color: #333;
+}
+
+/* ===============================
+   HEADER
+=============================== */
+header {
+  background: #03ac0e;
+  color: white;
+  padding: 18px;
   text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* ===============================
+   LAYOUT UTAMA
+=============================== */
+main {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 20px;
   padding: 20px;
 }
 
-.detail img {
-  max-width: 300px;
-  border-radius: 10px;
-  margin-bottom: 15px;
-}
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #f8f8f8;
-}
-
-header {
-  background: #4CAF50;
-  color: white;
-  padding: 1rem;
-  text-align: center;
-}
-
-main {
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem;
-}
-
+/* ===============================
+   GRID PRODUK (TOKOPEDIA STYLE)
+=============================== */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
 }
 
+/* ===============================
+   CARD PRODUK
+=============================== */
 .product {
   background: white;
-  border-radius: 8px;
-  padding: 1rem;
-  text-align: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  transition: 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+
+.product:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.12);
 }
 
 .product img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 5px;
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.product h3 {
+  font-size: 14px;
+  padding: 8px 10px;
+  min-height: 40px;
+}
+
+.product p {
+  padding: 0 10px;
+  font-weight: bold;
+  color: #03ac0e;
+  margin-bottom: 10px;
 }
 
 .product button {
-  background: #4CAF50;
-  color: white;
+  margin: auto 10px 12px;
+  padding: 8px;
   border: none;
-  padding: 0.5rem 1rem;
-  margin-top: 0.5rem;
+  background: #03ac0e;
+  color: white;
+  border-radius: 6px;
   cursor: pointer;
-  border-radius: 4px;
+  font-weight: bold;
 }
 
 .product button:hover {
-  background: #45a049;
+  background: #02910c;
 }
 
+/* ===============================
+   SIDEBAR KERANJANG
+=============================== */
 aside {
-  width: 250px;
-  background: #fff;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  height: fit-content;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+}
+
+aside h2 {
+  margin-bottom: 10px;
+}
+
+#cart-items {
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+#cart-items li {
+  font-size: 13px;
+  padding: 6px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#cart-items button {
+  background: red;
+  color: white;
+  border: none;
+  padding: 2px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+aside p {
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+aside button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  background: #03ac0e;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+aside button:hover {
+  background: #02910c;
+}
+
+/* ===============================
+   RESPONSIVE MOBILE
+=============================== */
+@media (max-width: 768px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+
+  aside {
+    order: -1;
+  }
 }

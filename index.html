@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lumensia Marketplace</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lumensia Marketplace</title>
+  <meta name="description" content="Lumensia Marketplace - Belanja kebutuhan sehari-hari dan produk lainnya dengan Pi.">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Lumensia Marketplace</h1>
-  </header>
+  <header>
+    <h1>Lumensia Marketplace</h1>
+  </header>
 
-  <main>
-        <section>
-      <h2>Daftar Produk</h2>
-      <div id="product-list" class="product-grid"></div>
-    </section>
+  <main>
+    <section>
+      <h2>Daftar Produk</h2>
+      <div id="product-list" class="product-grid"></div>
+    </section>
 
-        <aside>
-      <h2>Keranjang Belanja</h2>
-      <ul id="cart-items"></ul>
-      <p>Total Item: <span id="cart-count">0</span></p>
-      <p>Total Harga: <span id="total-price">0.00</span> π</p>
-      <button onclick="checkout()">Bayar dengan Pi</button>
-    </aside>
-  </main>
+    <aside>
+      <h2>Keranjang Belanja</h2>
+      <ul id="cart-items"></ul>
+      <p>Total Item: <span id="cart-count">0</span></p>
+      <p>Total Harga: <span id="total-price">0.00</span> π</p>
+      <button onclick="checkout()">Bayar dengan Pi</button>
+    </aside>
+  </main>
 
-    <script src="https://sdk.minepi.com/v2/pi-sdk.js"></script>
-  <script src="app.js"></script>
+  <!-- Pi SDK harus dimuat sebelum app.js -->
+  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+  <script src="app.js" defer></script>
 </body>
 </html>

@@ -170,3 +170,9 @@ const paymentCallbacks = {
     alert("Terjadi error pembayaran: " + error.message);
   }
 };
+// ======================================
+// LOAD AWAL HALAMAN
+// ======================================
+document.addEventListener("DOMContentLoaded", () => {
+  renderProducts();
+});

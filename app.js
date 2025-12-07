@@ -170,6 +170,32 @@ const paymentCallbacks = {
     alert("Terjadi error pembayaran: " + error.message);
   }
 };
+
+// ======================================
+// CHECKOUT PI
+// ======================================
+function checkout() {
+  if (cart.length === 0) {
+    alert("Keranjang belanja kosong!");
+    return;
+  }
+
+  if (typeof Pi === "undefined") {
+    alert("Pi Browser tidak terdeteksi. Buka marketplace melalui Pi Browser.");
+    return;
+  }
+
+  const amount = parseFloat(
+    cart.reduce((sum, item) => sum + item.price, 0).toFixed(2)
+  );
+  const memo = `Pembelian ${cart.length} item dari Lumensia Marketplace. Total: ${amount} Pi.`;
+  const metadata = { items: cart };
+
+  const paymentData = { amount, memo, metadata };
+
+  Pi.createPayment(paymentData, paymentCallbacks);
+}
+
 // ======================================
 // LOAD AWAL HALAMAN
 // ======================================

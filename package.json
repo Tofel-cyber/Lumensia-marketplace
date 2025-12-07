@@ -1,0 +1,24 @@
+{
+  "name": "lumensia-marketplace",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tofel-cyber/Lumensia-marketplace.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Tofel-cyber/Lumensia-marketplace/issues"
+  },
+  "homepage": "https://github.com/Tofel-cyber/Lumensia-marketplace#readme",
+  "dependencies": {
+    "axios": "^1.13.2"
+  }
+}

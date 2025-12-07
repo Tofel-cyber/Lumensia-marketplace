@@ -7,22 +7,22 @@ if (typeof Pi !== "undefined") {
   Pi.init({
     version: "2.0",
     api_url: "https://api.minepi.com/",
-    sandbox: false
+    sandbox: true // pakai true untuk testnet, false untuk mainnet
   });
 
   const scopes = ["payments"];
 
   function onIncompletePaymentFound(payment) {
     console.log("Incomplete payment ditemukan:", payment);
-    // Di sini kalau mau, kirim ke backend untuk dicek lagi
+    // opsional: kirim ke backend untuk dicek / diselesaikan
   }
 
   Pi.authenticate(scopes, onIncompletePaymentFound)
-    .then(auth => {
+    .then((auth) => {
       console.log("Pi authenticated:", auth);
       piAuth = auth;
     })
-    .catch(err => {
+    .catch((err) => {
       console.error("Auth error:", err);
     });
 } else {
@@ -63,7 +63,7 @@ const products = [
 // ======================================
 function renderProducts() {
   productList.innerHTML = "";
-  products.forEach(p => {
+  products.forEach((p) => {
     const productDiv = document.createElement("div");
     productDiv.classList.add("product");
 
@@ -81,7 +81,7 @@ function renderProducts() {
 // KERANJANG
 // ======================================
 function addToCart(id) {
-  const product = products.find(p => p.id === id);
+  const product = products.find((p) => p.id === id);
   cart.push(product);
   updateCart();
 }

@@ -1,7 +1,7 @@
 // api/payment-complete.js
 const axios = require("axios");
 
-const PI_BASE_URL = "https://api.minepi.com/v2";
+const PI_BASE_URL = "https://api.minepi.com/v2"; // Ganti ke https://sandbox-api.minepi.com/v2 jika testnet
 
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
@@ -27,11 +27,21 @@ module.exports = async (req, res) => {
       }
     };
 
-    const url = `${PI_BASE_URL}/payments/${paymentId}/complete`;
+    // **TAMBAHAN**: Cek status payment dulu sebelum complete
+    const checkUrl = `${PI_BASE_URL}/payments/${paymentId}`;
+    const checkResponse = await axios.get(checkUrl, config);
+    const paymentStatus = checkResponse.data.status;
 
-    const response = await axios.post(url, { txid }, config);
+    if (paymentStatus !== "approved") {
+      console.log(`Payment ${paymentId} status: ${paymentStatus}, cannot complete`);
+      return res.status(400).json({ error: `Payment status is ${paymentStatus}, cannot complete` });
+    }
 
-    // Di sini kamu bisa tandai order sebagai "paid & delivered" di database
+    // Complete payment
+    const completeUrl = `${PI_BASE_URL}/payments/${paymentId}/complete`;
+    const response = await axios.post(completeUrl, { txid }, config);
+
+    // Simpan status ke database (misal update order ke "paid & delivered")
     console.log("Payment completed:", response.data);
 
     return res.status(200).json({ ok: true, payment: response.data });

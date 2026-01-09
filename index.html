@@ -1,34 +1,96 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lumensia Marketplace</title>
-  <meta name="description" content="Lumensia Marketplace - Belanja kebutuhan sehari-hari dan produk lainnya dengan Pi.">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lumensia Marketplace - Pi Testnet</title>
+
+  <!-- PI SDK -->
+  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:linear-gradient(135deg,#667eea,#764ba2);
+      min-height:100vh;padding:20px
+    }
+    .testnet-banner{
+      position:fixed;top:0;left:0;right:0;
+      background:#ff9800;color:#000;
+      text-align:center;font-weight:bold;
+      padding:10px;z-index:9999
+    }
+    .header{text-align:center;color:#fff;margin:60px 0 30px}
+    .controls{
+      background:#fff;padding:20px;border-radius:20px;
+      display:flex;gap:15px;flex-wrap:wrap;justify-content:center;
+      margin-bottom:30px
+    }
+    button{
+      padding:12px 24px;border:none;border-radius:25px;
+      font-weight:bold;cursor:pointer
+    }
+    .btn-primary{background:#007bff;color:#fff}
+    .btn-warning{background:#ffc107}
+    .btn-danger{background:#dc3545;color:#fff}
+    .cart-info{background:#eee;padding:12px;border-radius:15px}
+    .products-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+      gap:20px;max-width:1200px;margin:auto
+    }
+    .product{
+      background:#fff;border-radius:20px;padding:20px;text-align:center
+    }
+    .product img{width:100%;height:160px;object-fit:cover;border-radius:15px}
+    .price{font-size:1.4em;font-weight:bold;color:#28a745;margin:10px 0}
+    .cart-section{
+      max-width:1200px;margin:40px auto;background:#fff;
+      padding:25px;border-radius:20px
+    }
+    .cart-items li{
+      display:flex;align-items:center;gap:10px;
+      padding:10px;border-bottom:1px solid #eee
+    }
+    .status{
+      position:fixed;top:60px;left:50%;
+      transform:translateX(-50%);
+      padding:12px 24px;border-radius:25px;
+      color:#fff;font-weight:bold;z-index:10000
+    }
+    .status.success{background:#28a745}
+    .status.error{background:#dc3545}
+    .status.warning{background:#ffc107;color:#000}
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Lumensia Marketplace</h1>
-  </header>
 
-  <main>
-    <section>
-      <h2>Daftar Produk</h2>
-      <div id="product-list" class="product-grid"></div>
-    </section>
+<div class="testnet-banner">🧪 TESTNET MODE - Pi Network</div>
 
-    <aside>
-      <h2>Keranjang Belanja</h2>
-      <ul id="cart-items"></ul>
-      <p>Total Item: <span id="cart-count">0</span></p>
-      <p>Total Harga: <span id="total-price">0.00</span> π</p>
-      <button onclick="checkout()">Bayar dengan Pi</button>
-    </aside>
-  </main>
+<div class="header">
+  <h1>🛒 Lumensia Marketplace</h1>
+  <p>Pi Network Testnet</p>
+</div>
 
-  <!-- Pi SDK harus dimuat sebelum app.js -->
-  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
-  <script src="app.js" defer></script>
+<div class="controls">
+  <button class="btn-primary" onclick="checkout()">💳 Checkout Pi</button>
+  <button class="btn-warning" onclick="reAuthAndRefresh()">🔄 Refresh Auth</button>
+  <button class="btn-danger" onclick="emergencyReset()">🆘 Clear Stuck</button>
+  <div class="cart-info">
+    🛒 <span id="cart-count">0</span> |
+    💰 <span id="total-price">0.00</span> π
+  </div>
+</div>
+
+<div class="products-grid" id="product-list"></div>
+
+<div class="cart-section">
+  <h2>🛒 Keranjang</h2>
+  <ul class="cart-items" id="cart-items"></ul>
+</div>
+
+<!-- APP JS -->
+<script src="./app.js"></script>
 </body>
 </html>

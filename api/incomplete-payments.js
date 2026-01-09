@@ -1,7 +1,7 @@
 // api/incomplete-payments.js
 const axios = require("axios");
 
-const PI_BASE_URL = "https://api.minepi.com/v2"; // Ganti ke sandbox jika testnet
+const PI_BASE_URL = "https://sandbox-api.minepi.com/v2";
 
 module.exports = async (req, res) => {
   if (req.method !== "POST") {

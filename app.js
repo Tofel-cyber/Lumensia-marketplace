@@ -2,33 +2,33 @@
 // INIT PI SDK + AUTH
 // ======================================
 let piAuth = null;
-let isProcessingPayment = false; // Flag untuk cegah multiple payment
+let isProcessingPayment = false; // Flag untuk cegah pembayaran ganda
 
 if (typeof Pi !== "undefined") {
   Pi.init({
     version: "2.0",
-    sandbox: true // true untuk testnet, false untuk mainnet
+    sandbox: true // Ubah ke false jika sudah ke mainnet/live
   });
 
   const scopes = ["payments"];
 
   function onIncompletePaymentFound(payment) {
     console.log("Incomplete payment ditemukan:", payment);
-    // Kirim ke backend untuk resolve incomplete payment
+    // Kirim ke backend resolve incomplete payment
     fetch("/api/incomplete-payments", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ paymentId: payment.identifier })
     })
-    .then(res => res.json())
-    .then(data => {
-      console.log("Incomplete payment resolved:", data);
-      alert("Pembayaran yang belum selesai telah di-resolve. Silakan coba checkout lagi.");
-    })
-    .catch(err => {
-      console.error("Error resolving incomplete payment:", err);
-      alert("Ada pembayaran yang belum selesai. Hubungi support.");
-    });
+      .then(res => res.json())
+      .then(data => {
+        console.log("Incomplete payment resolved:", data);
+        alert("Ada pembayaran yang belum selesai telah diselesaikan. Silakan coba checkout lagi.");
+      })
+      .catch(err => {
+        console.error("Error resolving incomplete payment:", err);
+        alert("Ada pembayaran yang belum selesai. Hubungi support.");
+      });
   }
 
   Pi.authenticate(scopes, onIncompletePaymentFound)
@@ -38,10 +38,10 @@ if (typeof Pi !== "undefined") {
     })
     .catch((err) => {
       console.error("Auth error:", err);
-      alert("Gagal autentikasi Pi. Pastikan Anda di Pi Browser.");
+      alert("Gagal autentikasi Pi. Pastikan kamu menggunakan Pi Browser.");
     });
 } else {
-  console.warn("Pi SDK tidak tersedia. Buka marketplace di Pi Browser.");
+  console.warn("Pi SDK tidak tersedia. Buka marketplace melalui Pi Browser.");
 }
 
 // ======================================
@@ -169,7 +169,7 @@ const paymentCallbacks = {
       } else {
         console.log("Complete ok:", data);
         alert("Pembayaran selesai! Terima kasih.");
-        cart = []; // Reset cart HANYA jika sukses
+        cart = [];
         updateCart();
         isProcessingPayment = false; // Reset flag
       }

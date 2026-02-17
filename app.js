@@ -127,69 +127,74 @@ function removeFromCart(index) {
 // ======================================
 // CALLBACK PEMBAYARAN → BACKEND
 // ======================================
+// ======================================
+// CALLBACK PEMBAYARAN → BACKEND
+// ======================================
 const paymentCallbacks = {
   onReadyForServerApproval: async function (paymentId) {
-    console.log("Ready for approval:", paymentId);
+    console.log("✅ Ready for approval:", paymentId);
     try {
       const res = await fetch("/api/payment-approve", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ paymentId })
       });
+      
       const data = await res.json();
 
-      if (!res.ok) {
-        console.error("Approve failed:", data);
-        alert("Approve gagal di server. Coba lagi.");
-        isProcessingPayment = false; // Reset flag
-      } else {
-        console.log("Approve ok:", data);
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error || data.detail || "Approval failed");
       }
+      
+      console.log("✅ Payment approved:", data);
     } catch (e) {
-      console.error("Approve error:", e);
-      alert("Error koneksi saat approve. Coba lagi.");
-      isProcessingPayment = false; // Reset flag
+      console.error("❌ Approve error:", e);
+      alert("Gagal approve payment: " + e.message);
+      isProcessingPayment = false;
+      throw e; // Important: re-throw agar Pi SDK tahu ada error
     }
   },
 
   onReadyForServerCompletion: async function (paymentId, txid) {
-    console.log("Ready for completion:", paymentId, txid);
+    console.log("✅ Ready for completion:", paymentId, txid);
     try {
       const res = await fetch("/api/payment-complete", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ paymentId, txid })
       });
+      
       const data = await res.json();
 
-      if (!res.ok) {
-        console.error("Complete failed:", data);
-        alert("Complete gagal di server. Coba lagi.");
-        isProcessingPayment = false; // Reset flag
-      } else {
-        console.log("Complete ok:", data);
-        alert("Pembayaran selesai! Terima kasih.");
-        cart = [];
-        updateCart();
-        isProcessingPayment = false; // Reset flag
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error || data.detail || "Completion failed");
       }
+      
+      console.log("✅ Payment completed:", data);
+      alert("🎉 Pembayaran berhasil! Terima kasih telah berbelanja di Lumensia Marketplace.");
+      
+      // Clear cart
+      cart = [];
+      updateCart();
+      isProcessingPayment = false;
     } catch (e) {
-      console.error("Complete error:", e);
-      alert("Error koneksi saat complete. Coba lagi.");
-      isProcessingPayment = false; // Reset flag
+      console.error("❌ Complete error:", e);
+      alert("Gagal complete payment: " + e.message);
+      isProcessingPayment = false;
+      throw e; // Important: re-throw
     }
   },
 
   onCancel: function (paymentId) {
-    console.log("Payment cancelled:", paymentId);
+    console.log("❌ Payment cancelled:", paymentId);
     alert("Pembayaran dibatalkan.");
-    isProcessingPayment = false; // Reset flag
+    isProcessingPayment = false;
   },
 
   onError: function (error, payment) {
-    console.error("Payment error:", error, payment);
-    alert("Terjadi error pembayaran: " + error.message);
-    isProcessingPayment = false; // Reset flag
+    console.error("❌ Payment error:", error, payment);
+    alert("Terjadi error pembayaran: " + (error.message || "Unknown error"));
+    isProcessingPayment = false;
   }
 };
 

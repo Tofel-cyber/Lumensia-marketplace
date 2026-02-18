@@ -124,9 +124,7 @@ function removeFromCart(index) {
   updateCart();
 }
 
-// ======================================
-// CALLBACK PEMBAYARAN → BACKEND
-// ======================================
+
 // ======================================
 // CALLBACK PEMBAYARAN → BACKEND
 // ======================================
@@ -151,7 +149,7 @@ const paymentCallbacks = {
       console.error("❌ Approve error:", e);
       alert("Gagal approve payment: " + e.message);
       isProcessingPayment = false;
-      throw e; // Important: re-throw agar Pi SDK tahu ada error
+      throw e;
     }
   },
 
@@ -172,16 +170,17 @@ const paymentCallbacks = {
       
       console.log("✅ Payment completed:", data);
       alert("🎉 Pembayaran berhasil! Terima kasih telah berbelanja di Lumensia Marketplace.");
-      
+
       // Clear cart
       cart = [];
       updateCart();
       isProcessingPayment = false;
+      
     } catch (e) {
       console.error("❌ Complete error:", e);
       alert("Gagal complete payment: " + e.message);
       isProcessingPayment = false;
-      throw e; // Important: re-throw
+      throw e;
     }
   },
 
